@@ -57,13 +57,13 @@ sampleApp.controller('StartCtrl',function ($scope, $http, $location){
             }
     
   $scope.goToSub =function(){
-      $location.path('StripeSub.html');
+      $location.path('StripeSub');
   };
 
 
 });
 
-      sampleApp.controller('SubCtrl', function($scope, $http) {
+      sampleApp.controller('SubCtrl', function($scope, $http, $location) {
         var getToken = function(successCb) {
           var request = {
             method: 'POST',
@@ -131,9 +131,11 @@ sampleApp.controller('StartCtrl',function ($scope, $http, $location){
 
         $scope.subscribeSilver = function() {
           subscribe('Silver');
+            $location.path('opendataA');
         };
 
         $scope.subscribeGold = function() {
           subscribe('Gold');
+            $location.path('opendataA');
         };
       });
