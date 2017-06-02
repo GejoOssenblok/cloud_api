@@ -1,5 +1,5 @@
-var labTutorApp = angular.module('labTutorApp', ['ngRoute']);
-labTutorApp.config(function($routeProvider) {
+var sampleApp = angular.module('sampleApp', ['ngRoute']);
+sampleApp.config(function($routeProvider) {
     $routeProvider
     .when("/", {
         templateUrl : "index.htm"
@@ -13,7 +13,7 @@ labTutorApp.config(function($routeProvider) {
         controller : "myCtrl"
     });
 });
-labTutorApp.controller('StartCtrl',function ($scope, $http, $location){
+sampleApp.controller('StartCtrl',function ($scope, $http, $location){
     
   parseParams = function() {
     var params = {}, queryString = location.hash.substring(1), regex = /([^&=]+)=([^&]*)/g, m;
@@ -62,3 +62,78 @@ labTutorApp.controller('StartCtrl',function ($scope, $http, $location){
 
 
 });
+
+      sampleApp.controller('SubCtrl', function($scope, $http) {
+        var getToken = function(successCb) {
+          var request = {
+            method: 'POST',
+            url: 'https://api.stripe.com/v1/tokens',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': 'Bearer sk_test_aDAMZEgxHl88xZNvrtFWDHjX'
+            },
+            data: 'card[number]=' + $scope.cardNumber + '&card[exp_month]=' + $scope.cardExpMonth + '&card[exp_year]=' + $scope.cardExpYear + '&card[cvc]=' + $scope.cardCvc
+          };
+          var errCb = function(err) {
+            alert("Wrong " + JSON.stringify(err));
+          };
+          $http(request).then(function (data) {
+            debugger;
+            successCb(data["data"]["id"]); // Of data.data.id, is hetzelfde
+          }, errCb).catch(errCb);
+        };
+
+        var createCustomer = function(token, successCb) {
+          var request = {
+            method: 'POST',
+            url: 'https://api.stripe.com/v1/customers',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': 'Bearer sk_test_aDAMZEgxHl88xZNvrtFWDHjX'
+            },
+            data: 'source=' + token
+          };
+          var errCb = function(err) {
+            alert("Wrong " + JSON.stringify(err));
+          };
+          $http(request).then(function (data) {
+            successCb(data.data.id);
+          }, errCb).catch(errCb);
+        };
+
+        var createSubscription = function(customer, plan, successCb) {
+          var request = {
+            method: 'POST',
+            url: 'https://api.stripe.com/v1/subscriptions',
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded',
+              'Authorization': 'Bearer sk_test_aDAMZEgxHl88xZNvrtFWDHjX'
+            },
+            data: 'plan=' + plan + '&customer=' + customer
+          };
+          var errCb = function(err) {
+            alert("Wrong " + JSON.stringify(err));
+          };
+          $http(request).then(function (data) {
+            successCb()
+          }, errCb).catch(errCb);
+        };
+
+        var subscribe = function (plan) {
+          getToken(function (token) {
+            createCustomer(token, function (customer) {
+              createSubscription(customer, plan, function (status) {
+                alert("Subscribed!");
+              });
+            });
+          });
+        };
+
+        $scope.subscribeSilver = function() {
+          subscribe('Silver');
+        };
+
+        $scope.subscribeGold = function() {
+          subscribe('Gold');
+        };
+      });
