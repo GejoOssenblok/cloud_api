@@ -10,7 +10,7 @@ app.use(express.static('client'));
 // Connect to database
 var db;
 var personsTable;
-MongoClient.connect('mongodb://localhost:27017/myproject2', function (err, _db) {
+MongoClient.connect('mongodb://localhost:27017/project', function (err, _db) {
   if (err) throw err; // Let it crash
   console.log("Connected to MongoDB");
 
@@ -64,4 +64,4 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.listen(3000);
+app.listen(5000);

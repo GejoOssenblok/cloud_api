@@ -13,11 +13,17 @@
     <script src="app.js"></script>
   </head>
   <body ng-controller="StartCtrl">
-    <button ng-click="login()">Log in</button>
-    {{ name }}
-    <!--<button ng-click="goToSub()">Go to A-activiteit</button>-->
-      <a href="#StripeSub">go to subscriptions</a>  
-      
+      <p>
+        <input ng-model="newperson.firstname" placeholder="Naam" type="text" />
+        <button ng-click="addPerson()">register</button>
+      </p>
+      <p>
+      <button ng-click="login()">Log in with Facebook</button>
+       {{ name }}
+      </p>
+      <p>
+      <a href="#StripeSub">go to subscriptions</a>
+      </p>
    <div ng-view>  
     </div>   
   </body>

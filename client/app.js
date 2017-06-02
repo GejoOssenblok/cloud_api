@@ -25,7 +25,7 @@ labTutorApp.controller('StartCtrl',function ($scope, $http, $location){
 
   params = parseParams();
   
-  $scope.name = "Name will be inflated here";
+  $scope.name = "Name ?";
   if (params.access_token) {
     $http({
       method: 'GET',
@@ -40,6 +40,21 @@ labTutorApp.controller('StartCtrl',function ($scope, $http, $location){
   $scope.login = function() {
     window.location.href = "https://www.facebook.com/dialog/oauth?client_id=183035075400001&response_type=token&redirect_uri=http://localhost:5000/"
   };
+    $http.get("http://localhost:5000/api/users").success(function (res) {
+        // Doe iets met resultaat 'res'
+        $scope.result = res;
+    });
+
+        $scope.newperson = {};
+
+        $scope.addPerson = function() {
+            $http.post("http://localhost:5000/api/user",
+            { 'firstname' : $scope.newperson.firstname }
+            ).success(function (res) {
+            $scope.result = res;
+            });
+            $scope.newperson.firstname="";
+            }
     
   $scope.goToSub =function(){
       $location.path('StripeSub.html');
