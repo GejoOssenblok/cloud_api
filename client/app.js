@@ -38,7 +38,7 @@ sampleApp.controller('StartCtrl',function ($scope, $http, $location){
   }
 
   $scope.login = function() {
-    window.location.href = "https://www.facebook.com/dialog/oauth?client_id=183035075400001&response_type=token&redirect_uri=http://localhost:5000/"
+    window.location.href = "https://www.facebook.com/dialog/oauth?client_id=TODO&response_type=token&redirect_uri=http://localhost:5000/"
   };
     $http.get("http://localhost:5000/api/users").success(function (res) {
         // Doe iets met resultaat 'res'
