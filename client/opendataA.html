@@ -12,8 +12,7 @@
   </head>
   <body ng-controller="myCtrl">
       
-      Search on google maps:<input id="maps_adres" type="text" value="
-Antwerpen Hanzestedenplaats	1"/>
+      Search on google maps:<input id="maps_adres" type="text" value=""/>
       <button ng-click="zoek()">google maps</button>
       Search :<input type="text" value="" ng-model="search" />
       <table border="1">
@@ -27,6 +26,9 @@ Antwerpen Hanzestedenplaats	1"/>
       </table>
        <iframe id="maps" width="600" height="450" frameborder="0" style="border:0" src=""
  allowfullscreen></iframe>
+      
+       <a href="http://www.buienradar.be" target="_blank"><img border="0" src="http://api.buienradar.nl/image/1.0/radarmapbe?width=250"></a>
+     
 
             <script>
           var app = angular.module('myApp', []);
@@ -39,8 +41,8 @@ Antwerpen Hanzestedenplaats	1"/>
                 }, function myError(response) {
                 $scope.dataAnt = response.statusText;
             });
-
-            
+              
+           
             $scope.zoek = function(){
                 $scope.adres = document.getElementById("maps_adres").value
                 console.log($scope.adres);
