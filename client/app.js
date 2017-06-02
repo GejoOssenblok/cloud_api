@@ -40,6 +40,23 @@ sampleApp.controller('StartCtrl',function ($scope, $http, $location){
   $scope.login = function() {
     window.location.href = "https://www.facebook.com/dialog/oauth?client_id=TODO&response_type=token&redirect_uri=http://localhost:5000/"
   };
+   /////////////////////////////////////////////////////// 
+            $scope.response = "E-mail ?";
+
+        $scope.access_token = $location.search().access_token;
+
+        $scope.login = function() {
+          window.location.href = "http://localhost:5000/login";
+        };
+
+        $scope.getEmail = function() {
+          $http.get('https://api.github.com/user/emails?access_token=' + $scope.access_token).then(function (response) {
+            $scope.response = response.data[0].email;
+          }, function (error) {
+            alert(JSON.stringify(error));
+          });
+        };
+  /////////////////////////////////////////////////////////////  
     $http.get("http://localhost:5000/api/users").success(function (res) {
         // Doe iets met resultaat 'res'
         $scope.result = res;

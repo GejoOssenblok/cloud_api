@@ -18,13 +18,19 @@
         <button ng-click="addPerson()">register</button>
       </p>
       <p>
-      <button ng-click="login()">Log in with Facebook</button>
+      <button ng-click="login()">Login with Facebook</button>
        {{ name }}
+      </p>
+      <p>
+       <button ng-show="!access_token" ng-click="login()">Login with Github</button>
+      <button ng-show="!!access_token" ng-click="getEmail()">Display Email</button>
+      {{ response }}
       </p>
       <p>
       <!--<a href="#StripeSub">go to subscriptions</a> -->
           <button ng-click="goToSub()">Go to subscriptions</button>
       </p>
+      
    <div ng-view>  
     </div>   
   </body>
