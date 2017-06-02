@@ -1,0 +1,16 @@
+ <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">WebSiteName</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="#">Home</a></li>
+      <li><a href="/">Logout</a></li>
+      <li><a ng-click="getproducts()">getproducts</a></li>
+      <li><a ng-click="login()">FB login</a></li>
+      <li><a href="#">Logged in as: {{ name }}</a></li>
+    </ul>
+  </div>
+</nav>
+    <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.0/css/font-awesome.css" />

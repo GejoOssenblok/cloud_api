@@ -1,0 +1,24 @@
+<!doctype html>
+<html lang="en" ng-app="labTutorApp">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login</title>
+
+    <!-- Angular -->
+    <script src="angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+
+    <!-- App specific -->
+    <script src="app.js"></script>
+  </head>
+  <body ng-controller="StartCtrl">
+    <button ng-click="login()">Log in</button>
+    {{ name }}
+    <!--<button ng-click="goToSub()">Go to A-activiteit</button>-->
+      <a href="#StripeSub">go to subscriptions</a>  
+      
+   <div ng-view>  
+    </div>   
+  </body>
+</html>
