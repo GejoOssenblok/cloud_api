@@ -139,3 +139,22 @@ sampleApp.controller('StartCtrl',function ($scope, $http, $location){
             $location.path('opendataA');
         };
       });
+
+ sampleApp.controller('myCtrl', function($scope, $http) {
+            $http({
+                method : "GET",
+                url : "http://datasets.antwerpen.be/v1/infrastructuur/akaartlocatie.json"
+            }).then(function mySuccess(response) {
+                $scope.dataAnt = response.data.akaartlocatie;
+                }, function myError(response) {
+                $scope.dataAnt = response.statusText;
+            });
+              
+           
+            $scope.zoek = function(){
+                $scope.adres = document.getElementById("maps_adres").value
+                console.log($scope.adres);
+       document.getElementById("maps").src = "https://www.google.com/maps/embed/v1/search?q=" + $scope.adres +
+        "&key=AIzaSyCotgPPX9TvbAEMnYuJaFB7mITVORFKgQI"
+            }
+            });

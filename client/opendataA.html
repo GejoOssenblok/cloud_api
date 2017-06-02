@@ -4,18 +4,27 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>json</title>
-
+      <link rel="stylesheet" type="text/css" href="ANTWERP.css" />
     <!-- Angular -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.js"> </script>
-      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
+    <script src="angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular-route.js"></script>
 
+    <!-- App specific -->
+    <script src="app.js"></script>
   </head>
   <body ng-controller="myCtrl">
       
-      Search on google maps:<input id="maps_adres" type="text" value=""/>
-      <button ng-click="zoek()">google maps</button>
-      Search :<input type="text" value="" ng-model="search" />
+      Search on google maps:<input id="maps_adres" placeholder=" District Straat Huisnummer" type="text" value=""/>
+      <button ng-click="zoek()">View</button>
+      Search in list :<input type="text" value="" ng-model="search" />
       <table border="1">
+          <tr>
+          <td>Naam</td>
+          <td>Category</td>
+          <td>District</td>
+          <td>Straat</td>
+          <td>Huisnummer</td>
+          </tr>
       <tr ng-repeat="dataObj in dataAnt | filter : search">
           <td>{{dataObj.naam}}</td>
           <td>{{dataObj.category}}</td>
@@ -24,34 +33,9 @@
           <td>{{dataObj.huisnummer}}</td>
       </tr>
       </table>
-       <iframe id="maps" width="600" height="450" frameborder="0" style="border:0" src=""
- allowfullscreen></iframe>
+       <iframe id="maps" width="600" height="450" frameborder="0" style="border:0" src="" allowfullscreen></iframe>
       
        <a href="http://www.buienradar.be" target="_blank"><img border="0" src="http://api.buienradar.nl/image/1.0/radarmapbe?width=250"></a>
      
-
-            <script>
-          var app = angular.module('myApp', []);
-          app.controller('myCtrl', function($scope, $http) {
-            $http({
-                method : "GET",
-                url : "http://datasets.antwerpen.be/v1/infrastructuur/akaartlocatie.json"
-            }).then(function mySuccess(response) {
-                $scope.dataAnt = response.data.akaartlocatie;
-                }, function myError(response) {
-                $scope.dataAnt = response.statusText;
-            });
-              
-           
-            $scope.zoek = function(){
-                $scope.adres = document.getElementById("maps_adres").value
-                console.log($scope.adres);
-       document.getElementById("maps").src = "https://www.google.com/maps/embed/v1/search?q=" + $scope.adres +
-        "&key=AIzaSyCotgPPX9TvbAEMnYuJaFB7mITVORFKgQI"
-            }
-            });
-          
-</script>
-      
   </body>
 </html>
